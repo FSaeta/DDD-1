@@ -1,87 +1,80 @@
 # Dinâmica: Design Estratégico do Projeto
 
-## Objetivo
-Identificar os subdomínios do projeto, classificá-los (Core, Supporting, Generic) e desenhar os bounded contexts, incluindo suas interações. Esse exercício ajudará a criar uma visão clara e estratégica do domínio.
-
----
-
 ## 1. Nome do Projeto
-**Game Now**
+**GameNow**
 
 ---
 
 ## 2. Objetivo Principal do Projeto
-**Facilitar a busca e organização de partidas para esportes coletivos, conectando jogadores com níveis semelhantes e locais acessíveis**  
+**Conectar jogadores de níveis compatíveis a partidas esportivas coletivas, simplificando a organização e facilitando o acesso a locais acessíveis.**  
 
 ---
 
 ## 3. Identificação dos Subdomínios
-Liste os subdomínios do sistema e classifique-os como **Core Domain**, **Supporting Subdomain** ou **Generic Subdomain**.
 
 | **Subdomínio**              | **Descrição**                                                                                      | **Tipo**         |
 |-----------------------------|--------------------------------------------------------------------------------------------------|------------------|
-| Conectar Jogadores a Eventos esportivos | Agenda e encontra partidas esportivas criadas pelos jogadores ou organizações esportivas | Core Domain  |
-| Criação de Times | Conecta pessoas acostumadas a jogarem juntas, permitindo a perticipação de torneios                         | Supporting       |
-| Sistema de Localização | Exibe o mapa, indicando os locais pelos filtros configurados pelos usuários                           | Generic          |
+| Agendamento de Partidas | Gerencia a criação, busca e organização de eventos esportivos. | Core Domain  |
+| Gerenciamento de Times | Permite a formação de grupos para participação em torneios e partidas.                         | Supporting       |
+| Sistema de Localização | Fornece geolocalização de espaços esportivos e filtros de proximidade.                           | Generic          |
+Avaliação de Habilidades | Classifica jogadores por nível técnico para compatibilidade em partidas. | Supporting
 
 ---
 
 ## 4. Desenho dos Bounded Contexts
-Liste e descreva os bounded contexts identificados no projeto. Explique a responsabilidade de cada um.
 
 | **Bounded Context**           | **Responsabilidade**                                                              | **Subdomínios Relacionados** |
 |-------------------------------|-----------------------------------------------------------------------------------|------------------------------|
-|    | Gerencia as consultas médicas, do agendamento à finalização, incluindo emissão de receitas.         | Gestão de Consultas         |
-| Ex.: Contexto de Pagamentos   | Processa cobranças de consultas e repasses para médicos ou clínicas.                              | Pagamentos                  |
+|Agendamento de Partidas| Criação de eventos, gestão de horários, notificação de participantes e integração com locais. | Agendamento de Partidas, Sistema de Localização|
+|Gerenciamento de Times| Formação de equipes, convites a jogadores e participação em competições.| Gerenciamento de Times, Avaliação de Habilidades|
+Localização Esportiva|Integração com APIs de mapas e filtragem de espaços com base em acessibilidade e avaliações|Sistema de Localização|
+Perfil do Jogador|Armazena dados de nível técnico, histórico de partidas e reputação.|Avaliação de Habilidades
+
 
 ---
 
 ## 5. Comunicação entre os Bounded Contexts
-Explique como os bounded contexts vão se comunicar. Use os padrões de comunicação, como:
-- **Mensageria/Eventos (desacoplado):** Ex.: O Contexto de Consultas emite um evento "Consulta Finalizada", consumido pelo Contexto de Pagamentos.
-- **APIs (síncrono):** Ex.: O Contexto de Pagamentos consulta informações de preços no Contexto de Consultas.
 
 | **De (Origem)**              | **Para (Destino)**          | **Forma de Comunicação**    | **Exemplo de Evento/Chamada**                  |
 |------------------------------|-----------------------------|-----------------------------|-----------------------------------------------|
-| Contexto de Consultas        | Contexto de Pagamentos      | Mensageria (Evento)         | "Consulta Finalizada"                         |
-| Contexto de Cadastro          | Contexto de Consultas      | API                         | Obter informações de um Paciente pelo ID      |
+|Agendamento de Partidas|Perfil do Jogador|API (síncrono)|Consultar nível técnico para sugestão de partidas|
+|Gerenciamento de Times|Agendamento de Partidas| Mensageria (Evento)|“Time Formado” → Notificar participantes do evento|
+|Localização Esportiva|Agendamento de Partidas|API (síncrono)|Buscar locais disponíveis por raio de distância
 
 ---
 
 ## 6. Definição da Linguagem Ubíqua
-Liste os termos principais da Linguagem Ubíqua do projeto. Explique brevemente cada termo.
 
 | **Termo**                    | **Descrição**                                                                                   |
 |------------------------------|-----------------------------------------------------------------------------------------------|
-| Ex.: Consulta                | Sessão médica entre paciente e médico.                                                       |
-| Ex.: Paciente                | Usuário que agenda e realiza consultas.                                                      |
-| Ex.: Receita                 | Prescrição médica gerada durante a consulta.                                                 |
+|Partida|Evento esportivo com data, local, esporte específico e participantes.|
+|Nível Técnico|Classificação dos jogadores (iniciante, intermediário ou avançado) baseada no histórico de partidas realizadas.|
+|Local Acessível|Espaço esportivo com infraestrutura adequada e avaliação da comunidade.|
+Reputação|Pontuação baseada em participação, pontualidade e feedback de outros jogadores.
 
 ---
 
 ## 7. Estratégia de Desenvolvimento
-Para cada tipo de subdomínio, explique a abordagem para implementação:
-- **Core Domain:** Desenvolver internamente com foco total.
-- **Supporting Subdomain:** Desenvolver internamente ou parcialmente terceirizar.
-- **Generic Subdomain:** Usar ferramentas ou serviços de mercado.
 
 | **Subdomínio**              | **Estratégia**                         | **Ferramentas ou Serviços (se aplicável)** |
 |-----------------------------|---------------------------------------|-------------------------------------------|
-| Gestão de Consultas         | Desenvolvimento interno               |                                           |
-| Cadastro de Usuários        | Interno com uso de Auth0 para login   | Auth0                                     |
-| Pagamentos                  | Terceirizar usando API Stripe         | Stripe                                    |
+|Agendamento de Partidas|Desenvolvimento interno (foco total)|Node.js, RabbitMQ para eventos|
+|Gerenciamento de Times|Desenvolvimento interno|Firebase (armazenamento de grupos)|
+|Sistema de Localização|Terceirizado via API|Google Maps API, OpenStreetMap|
+Avaliação de Habilidades|Desenvolvimento interno utilizando algoritmos personalizados e técnicas de Machine Learning para análise preditiva do desempenho dos jogadores.|Python, TensorFlow (análise de histórico)
 
 ---
 
-## 8. Diagrama Visual (Opcional, mas Recomendado)
-Desenhe um diagrama que mostre:
-- Os bounded contexts.
-- Como eles se comunicam.
-- A relação com os subdomínios.
+## 8. Diagrama Visual - GameNow
 
-Use ferramentas como **Miro**, **Lucidchart** ou mesmo papel e caneta para criar seu diagrama e adicionar ao projeto.
-
----
+```
+Agendamento de Partidas --> Perfil do Jogador: Consulta API
+Agendamento de Partidas --> Sistema de Localização: Busca Locais
+Agendamento de Partidas --> Gerenciamento de Times: Publica Evento
+Gerenciamento de Times --> Perfil do Jogador: Atualiza Habilidades
+Sistema de Localização --> Google Maps API: Integração
+Perfil do Jogador --> Machine Learning: Treina Modelo
+```
 
 ## Dicas para Apresentação
 - Explique cada parte do design, focando no **Core Domain** (o coração do negócio).
