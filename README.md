@@ -6,13 +6,12 @@ Identificar os subdomínios do projeto, classificá-los (Core, Supporting, Gener
 ---
 
 ## 1. Nome do Projeto
-**[Escreva o nome do sistema ou aplicação que está sendo modelado]**
+**Game Now**
 
 ---
 
 ## 2. Objetivo Principal do Projeto
-**[Explique o propósito do sistema em uma ou duas frases]**  
-*Exemplo:* Facilitar o agendamento de consultas médicas online entre pacientes e médicos.
+**Facilitar a busca e organização de partidas para esportes coletivos, conectando jogadores com níveis semelhantes e locais acessíveis**  
 
 ---
 
@@ -21,18 +20,18 @@ Liste os subdomínios do sistema e classifique-os como **Core Domain**, **Suppor
 
 | **Subdomínio**              | **Descrição**                                                                                      | **Tipo**         |
 |-----------------------------|--------------------------------------------------------------------------------------------------|------------------|
-| Ex.: Gestão de Consultas    | Gerencia o agendamento, consulta por vídeo e emissão de atestados e receitas.                   | Core Domain      |
-| Ex.: Cadastro de Usuários   | Gerencia o login, cadastro e permissões dos médicos e pacientes.                                | Supporting       |
-| Ex.: Pagamentos             | Processa pagamentos e repassa valores para médicos.                                             | Generic          |
+| Conectar Jogadores a Eventos esportivos | Agenda e encontra partidas esportivas criadas pelos jogadores ou organizações esportivas | Core Domain  |
+| Criação de Times | Conecta pessoas acostumadas a jogarem juntas, permitindo a perticipação de torneios                         | Supporting       |
+| Sistema de Localização | Exibe o mapa, indicando os locais pelos filtros configurados pelos usuários                           | Generic          |
 
 ---
 
 ## 4. Desenho dos Bounded Contexts
 Liste e descreva os bounded contexts identificados no projeto. Explique a responsabilidade de cada um.
 
-| **Bounded Context**           | **Responsabilidade**                                                                                 | **Subdomínios Relacionados** |
-|-------------------------------|-----------------------------------------------------------------------------------------------------|-----------------------------|
-| Ex.: Contexto de Consultas    | Gerencia as consultas médicas, do agendamento à finalização, incluindo emissão de receitas.         | Gestão de Consultas         |
+| **Bounded Context**           | **Responsabilidade**                                                              | **Subdomínios Relacionados** |
+|-------------------------------|-----------------------------------------------------------------------------------|------------------------------|
+|    | Gerencia as consultas médicas, do agendamento à finalização, incluindo emissão de receitas.         | Gestão de Consultas         |
 | Ex.: Contexto de Pagamentos   | Processa cobranças de consultas e repasses para médicos ou clínicas.                              | Pagamentos                  |
 
 ---
