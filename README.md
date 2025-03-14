@@ -38,6 +38,7 @@ Perfil do Jogador|Armazena dados de nível técnico, histórico de partidas e re
 | **De (Origem)**              | **Para (Destino)**          | **Forma de Comunicação**    | **Exemplo de Evento/Chamada**                  |
 |------------------------------|-----------------------------|-----------------------------|-----------------------------------------------|
 |Agendamento de Partidas|Perfil do Jogador|API (síncrono)|Consultar nível técnico para sugestão de partidas|
+|Agendamento de Partidas|Gerenciamento de times|API (síncrono)|Obter seleção de times disponíveis|
 |Gerenciamento de Times|Agendamento de Partidas| Mensageria (Evento)|“Time Formado” → Notificar participantes do evento|
 |Localização Esportiva|Agendamento de Partidas|API (síncrono)|Buscar locais disponíveis por raio de distância
 
@@ -49,8 +50,10 @@ Perfil do Jogador|Armazena dados de nível técnico, histórico de partidas e re
 |------------------------------|-----------------------------------------------------------------------------------------------|
 |Partida|Evento esportivo com data, local, esporte específico e participantes.|
 |Nível Técnico|Classificação dos jogadores (iniciante, intermediário ou avançado) baseada no histórico de partidas realizadas.|
-|Local Acessível|Espaço esportivo com infraestrutura adequada e avaliação da comunidade.|
+|Local|Espaço esportivo com infraestrutura adequada e avaliação da comunidade.|
 Reputação|Pontuação baseada em participação, pontualidade e feedback de outros jogadores.
+|Players da Partida|Formação de players inscritos na partida com base na modalidade do esporte|
+|Modalidade|Modalidade do esporte selecionado, limitando e agregando os jogadores.
 
 ---
 
