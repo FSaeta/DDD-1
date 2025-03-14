@@ -1,5 +1,15 @@
 # Dinâmica: Design Estratégico do Projeto
 
+# Entrega da Atividade DDD-1
+### Alunos:
+
+| Nome                           | RM      |
+|--------------------------------|--------|
+| FERNANDO REBELATO SAETA       | 359961 |
+| INGO HENRIQUE ALMENDROS GIRÃO | 358616 |
+| KALEO VIEIRA LEITE            | 359754 |
+| NATHAN GRECCO FONSECA         | 359289 |
+
 ## 1. Nome do Projeto
 **GameNow**
 
