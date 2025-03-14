@@ -15,6 +15,7 @@
 | **Subdomínio**              | **Descrição**                                                                                      | **Tipo**         |
 |-----------------------------|--------------------------------------------------------------------------------------------------|------------------|
 | Agendamento de Partidas | Gerencia a criação, busca e organização de eventos esportivos. | Core Domain  |
+| Gerenciador de Players da Partida | Gerencia a criação, busca e organização de eventos esportivos. | Core Domain  |
 | Gerenciamento de Times | Permite a formação de grupos para participação em torneios e partidas.                         | Supporting       |
 | Sistema de Localização | Fornece geolocalização de espaços esportivos e filtros de proximidade.                           | Generic          |
 Avaliação de Habilidades | Classifica jogadores por nível técnico para compatibilidade em partidas. | Supporting
@@ -26,9 +27,12 @@ Avaliação de Habilidades | Classifica jogadores por nível técnico para compa
 | **Bounded Context**           | **Responsabilidade**                                                              | **Subdomínios Relacionados** |
 |-------------------------------|-----------------------------------------------------------------------------------|------------------------------|
 |Agendamento de Partidas| Criação de eventos, gestão de horários, notificação de participantes e integração com locais. | Agendamento de Partidas, Sistema de Localização|
-|Gerenciamento de Times| Formação de equipes, convites a jogadores e participação em competições.| Gerenciamento de Times, Avaliação de Habilidades|
-Localização Esportiva|Integração com APIs de mapas e filtragem de espaços com base em acessibilidade e avaliações|Sistema de Localização|
-Perfil do Jogador|Armazena dados de nível técnico, histórico de partidas e reputação.|Avaliação de Habilidades
+|Gerenciamento de Times| Formação de equipes, convites a jogadores e participação em competições.| Gerenciamento de Times, Avaliação de Habilidades, Players |
+Localização |Integração com APIs de mapas e filtragem de espaços com base em acessibilidade e avaliações|Sistema de Localização |
+| Locais de Esporte | Armazena informações sobre os locais, reputação, localização relacionadas com as modalidades de esportes. | Modalidade de Esportes, Agendamento de Partidas, Localização |
+Players | Armazena dados de nível técnico, histórico de partidas e reputação.|Avaliação de Habilidades|
+| Esportes | Manter preferências dos players e criação de regras para cada Modalidade. | Agendamento de Partidas, Organização de Players da Partida, Modalidade de Esportes |
+
 
 
 ---
@@ -39,8 +43,16 @@ Perfil do Jogador|Armazena dados de nível técnico, histórico de partidas e re
 |------------------------------|-----------------------------|-----------------------------|-----------------------------------------------|
 |Agendamento de Partidas|Perfil do Jogador|API (síncrono)|Consultar nível técnico para sugestão de partidas|
 |Agendamento de Partidas|Gerenciamento de times|API (síncrono)|Obter seleção de times disponíveis|
+| Agendamento de Partidas | Locais de Esporte | API (síncrono) | Verificar disponibilidade do local para a partida |
+| Agendamento de Partidas | Esportes   | API (síncrono)  | Validar regras do esporte para criação de partidas |
 |Gerenciamento de Times|Agendamento de Partidas| Mensageria (Evento)|“Time Formado” → Notificar participantes do evento|
-|Localização Esportiva|Agendamento de Partidas|API (síncrono)|Buscar locais disponíveis por raio de distância
+| Gerenciamento de Times       | Players                       | API (síncrono)            | Atualizar os times do jogador |
+| Gerenciamento de Times       | Avaliação de Habilidades      | API (síncrono)            | Enviar estatísticas da performance dos jogadores |
+|Localização Esportiva|Agendamento de Partidas|API (síncrono)|Buscar locais disponíveis por raio de distância|
+| Localização Esportiva        | Locais de Esporte             | API (síncrono)            | Obter avaliações e acessibilidade dos locais |
+| Locais de Esporte            | Agendamento de Partidas       | Mensageria (Evento)       | “Local Reservado” → Confirmar agendamento da partida |
+| Players                      | Avaliação de Habilidades      | API (síncrono)            | Registrar nova avaliação após a partida |
+| Players                      | Esportes                      | API (síncrono)            | Atualizar preferências de esporte do jogador |
 
 ---
 
